@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/pa/db" VERSION="2016051305" COMMENT="XMLDB file for Moodle mod/pa"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="pa" COMMENT="This contains details of a programming assignment">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course pa activity belongs to"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances"/>
+        <FIELD NAME="intro" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="General introduction of the pa activity"/>
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="grade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="100" SEQUENCE="false" COMMENT="The maximum grade. Can be negative to indicate the use of a scale."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="pa_testcases" COMMENT="This contains test case data of each programming assignment">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course pa activity belongs to"/>
+        <FIELD NAME="input1" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="input data of test case 1"/>
+        <FIELD NAME="output1" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="output data of test case 1"/>
+        <FIELD NAME="input2" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="input data of test case 2"/>
+        <FIELD NAME="output2" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="output data of test case 2"/>
+        <FIELD NAME="input3" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="input data of test case 3"/>
+        <FIELD NAME="output3" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="output data of test case 3"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id,course"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+        <INDEX NAME="id" UNIQUE="false" FIELDS="id"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="pa_submission" COMMENT="This contains Submission data of each programming assignment">
+      <FIELDS>
+        <FIELD NAME="submission_id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+        <FIELD NAME="assignment_id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="assignment id of each assignment"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course pa activity belongs to"/>
+        <FIELD NAME="grade" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="datesubmitted" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+        <FIELD NAME="source" TYPE="text" LENGTH="10000" NOTNULL="true" SEQUENCE="false" COMMENT="assignment source file"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="submission_id"/>
+      </KEYS>
+    </TABLE>
+
+  </TABLES>
+</XMLDB>
