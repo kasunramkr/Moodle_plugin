@@ -14,19 +14,6 @@
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="grade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="100" SEQUENCE="false" COMMENT="The maximum grade. Can be negative to indicate the use of a scale."/>
-      </FIELDS>
-      <KEYS>
-        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-      </KEYS>
-      <INDEXES>
-        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
-      </INDEXES>
-    </TABLE>
-
-    <TABLE NAME="pa_testcases" COMMENT="This contains test case data of each programming assignment">
-      <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
-        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course pa activity belongs to"/>
         <FIELD NAME="input1" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="input data of test case 1"/>
         <FIELD NAME="output1" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="output data of test case 1"/>
         <FIELD NAME="input2" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="input data of test case 2"/>
@@ -35,11 +22,10 @@
         <FIELD NAME="output3" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="output data of test case 3"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="primary" TYPE="primary" FIELDS="id,course"/>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
       <INDEXES>
         <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
-        <INDEX NAME="id" UNIQUE="false" FIELDS="id"/>
       </INDEXES>
     </TABLE>
 
@@ -50,7 +36,7 @@
         <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course pa activity belongs to"/>
         <FIELD NAME="grade" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" />
         <FIELD NAME="datesubmitted" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
-        <FIELD NAME="source" TYPE="text" LENGTH="10000" NOTNULL="true" SEQUENCE="false" COMMENT="assignment source file"/>
+        <FIELD NAME="source" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="assignment source file"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="submission_id"/>

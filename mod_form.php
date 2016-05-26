@@ -71,15 +71,24 @@ class mod_pa_mod_form extends moodleform_mod {
         // ... or adding more fieldsets ('header' elements) if needed for better logic.
 
         $mform->addElement('header', 'pafieldset', get_string('pafieldset', 'pa'));
-		
-		$mform->addElement('static', 'label1', 'Test Case 1 <br/>Input', "<textarea name='input1' style='font-size:15pt;height:130px;width:400px;'></textarea>");
-		$mform->addElement('static', 'label1', 'Output', "<textarea name='output1' style='font-size:15pt;height:130px;width:400px;'></textarea>");
-		
-		$mform->addElement('static', 'label1', 'Test Case 2 <br/>Input', "<textarea name='input2' style='font-size:15pt;height:130px;width:400px;'></textarea>");
-		$mform->addElement('static', 'label1', 'Output', "<textarea name='output2' style='font-size:15pt;height:130px;width:400px;'></textarea>");
 
-		$mform->addElement('static', 'label1', 'Test Case 3 <br/>Input', "<textarea name='input3' style='font-size:15pt;height:130px;width:400px;'></textarea>");
-		$mform->addElement('static', 'label1', 'Output', "<textarea name='output3' style='font-size:15pt;height:130px;width:400px;'></textarea>");
+        $mform->addElement('text', 'input1', 'Input 1');
+        $mform->addElement('text', 'output1', 'Output 1');
+
+        $mform->addElement('text', 'input2', 'Input 2');
+        $mform->addElement('text', 'output2', 'Output 2');
+
+        $mform->addElement('text', 'input3', 'Input 3');
+        $mform->addElement('text', 'output3', 'Output 3');
+
+//      $mform->addElement('static', 'label1', 'Test Case 1 <br/>Input', "<textarea name='input1' style='font-size:15pt;height:130px;width:400px;'></textarea>");
+//		$mform->addElement('static', 'label1', 'Output', "<textarea name='output1' style='font-size:15pt;height:130px;width:400px;'></textarea>");
+
+//		$mform->addElement('static', 'label1', 'Test Case 2 <br/>Input', "<textarea name='input2' style='font-size:15pt;height:130px;width:400px;'></textarea>");
+//		$mform->addElement('static', 'label1', 'Output', "<textarea name='output2' style='font-size:15pt;height:130px;width:400px;'></textarea>");
+
+//		$mform->addElement('static', 'label1', 'Test Case 3 <br/>Input', "<textarea name='input3' style='font-size:15pt;height:130px;width:400px;'></textarea>");
+//		$mform->addElement('static', 'label1', 'Output', "<textarea name='output3' style='font-size:15pt;height:130px;width:400px;'></textarea>");
 
         // Add standard grading elements.
         $this->standard_grading_coursemodule_elements();
