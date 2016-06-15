@@ -73,7 +73,10 @@ class mod_pa_mod_form extends moodleform_mod {
         $mform->addElement('header', 'pafieldset', get_string('pafieldset', 'pa'));
 
         $mform->addElement('textarea', 'input1', 'Input 1');
+        $mform->addRule('input1', null, 'required', null, 'client');
+
         $mform->addElement('textarea', 'output1', 'Output 1');
+        $mform->addRule('output1', null, 'required', null, 'client');
 
         $mform->addElement('textarea', 'input2', 'Input 2');
         $mform->addElement('textarea', 'output2', 'Output 2');

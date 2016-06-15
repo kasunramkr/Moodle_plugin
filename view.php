@@ -61,13 +61,6 @@ $PAGE->set_url('/mod/pa/view.php', array('id' => $cm->id));
 $PAGE->set_title(format_string($pa->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-/*
- * Other things you may want to set - remove if not needed.
- * $PAGE->set_cacheable(false);
- * $PAGE->set_focuscontrol('some-html-id');
- * $PAGE->add_body_class('pa-'.$somevar);
- */
-
 // Output starts here.
 echo $OUTPUT->header();
 
@@ -76,9 +69,26 @@ if ($pa->intro) {
     echo $OUTPUT->box(format_module_intro('pa', $pa, $cm->id), 'generalbox mod_introbox', 'paintro');
 }
 
-// Replace the following lines with you own code.
-
 echo $OUTPUT->heading('Submition');
+
+echo "  Select Language  ";
+echo "<select name=\"lang\" id=\"lang\" class=\"span6\">
+                    <option value=\"11\">C (gcc-4.3.4)</option>
+                    <option value=\"27\">C# (mono-2.8)</option>
+                    <option value=\"44\">C++0x (gcc-4.5.1)</option>
+                    <option value=\"10\">Java (sun-jdk-1.6.0.17)</option>
+                    <option value=\"4\">Python (python 2.6.4)</option>
+                    <option value=\"116\">Python 3 (python-3.1.2)</option>
+                    <option value=\"40\">SQL (sqlite3-3.7.3)</option>
+                </select>";
+
+echo "<br>";
+echo "<br>";
+
+echo "<input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">";
+echo "<br>";
+echo "<br>";
+
 echo "<textarea name='source' style='font-size:15pt;height:500px;width:700px;'></textarea><br/>";
 echo "<button type='button'>Submit</button>";
 
