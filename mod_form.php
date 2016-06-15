@@ -72,26 +72,41 @@ class mod_pa_mod_form extends moodleform_mod {
 
         $mform->addElement('header', 'pafieldset', get_string('pafieldset', 'pa'));
 
+        $mform->addElement('checkbox','use1','Use test case');
+        $mform->addElement('checkbox','visible1','Hide for student');
         $mform->addElement('textarea', 'input1', 'Input 1');
-        $mform->addRule('input1', null, 'required', null, 'client');
-
         $mform->addElement('textarea', 'output1', 'Output 1');
-        $mform->addRule('output1', null, 'required', null, 'client');
+        $mform->addElement('textarea', 'mark1', 'Marks');
 
+        $mform->setType('mark1',PARAM_INT);
+        $mform->disabledIf('input1','use1');
+        $mform->disabledIf('output1','use1');
+        $mform->disabledIf('visible1','use1');
+        $mform->disabledIf('mark1','use1');
+
+        $mform->addElement('checkbox','use2','Use test case');
+        $mform->addElement('checkbox','visible2','Hide for student');
         $mform->addElement('textarea', 'input2', 'Input 2');
         $mform->addElement('textarea', 'output2', 'Output 2');
+        $mform->addElement('textarea', 'mark2', 'Marks');
 
+        $mform->setType('mark2',PARAM_INT);
+        $mform->disabledIf('input2','use2');
+        $mform->disabledIf('output2','use2');
+        $mform->disabledIf('visible2','use2');
+        $mform->disabledIf('mark2','use2');
+
+        $mform->addElement('checkbox','use3','Use test case');
+        $mform->addElement('checkbox','visible3','Hide for student');
         $mform->addElement('textarea', 'input3', 'Input 3');
         $mform->addElement('textarea', 'output3', 'Output 3');
+        $mform->addElement('textarea', 'mark3', 'Marks');
 
-//      $mform->addElement('static', 'label1', 'Test Case 1 <br/>Input', "<textarea name='input1' style='font-size:15pt;height:130px;width:400px;'></textarea>");
-//		$mform->addElement('static', 'label1', 'Output', "<textarea name='output1' style='font-size:15pt;height:130px;width:400px;'></textarea>");
-
-//		$mform->addElement('static', 'label1', 'Test Case 2 <br/>Input', "<textarea name='input2' style='font-size:15pt;height:130px;width:400px;'></textarea>");
-//		$mform->addElement('static', 'label1', 'Output', "<textarea name='output2' style='font-size:15pt;height:130px;width:400px;'></textarea>");
-
-//		$mform->addElement('static', 'label1', 'Test Case 3 <br/>Input', "<textarea name='input3' style='font-size:15pt;height:130px;width:400px;'></textarea>");
-//		$mform->addElement('static', 'label1', 'Output', "<textarea name='output3' style='font-size:15pt;height:130px;width:400px;'></textarea>");
+        $mform->setType('mark3',PARAM_INT);
+        $mform->disabledIf('input3','use3');
+        $mform->disabledIf('output3','use3');
+        $mform->disabledIf('visible3','use3');
+        $mform->disabledIf('mark3','use3');
 
         // Add standard grading elements.
         $this->standard_grading_coursemodule_elements();

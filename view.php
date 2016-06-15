@@ -1,18 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
-//
-// Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Moodle is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 
 /**
  * Prints a particular instance of pa
@@ -29,6 +16,8 @@
 
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
+
+global $DB;
 
 $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
 $n  = optional_param('n', 0, PARAM_INT);  // ... pa instance ID - it should be named as the first character of the module.
@@ -61,6 +50,8 @@ $PAGE->set_url('/mod/pa/view.php', array('id' => $cm->id));
 $PAGE->set_title(format_string($pa->name));
 $PAGE->set_heading(format_string($course->fullname));
 
+$context = context_module::instance($cm->id);
+
 // Output starts here.
 echo $OUTPUT->header();
 
@@ -69,28 +60,79 @@ if ($pa->intro) {
     echo $OUTPUT->box(format_module_intro('pa', $pa, $cm->id), 'generalbox mod_introbox', 'paintro');
 }
 
-echo $OUTPUT->heading('Submition');
+echo $OUTPUT->heading('Test cases');
 
-echo "  Select Language  ";
-echo "<select name=\"lang\" id=\"lang\" class=\"span6\">
-                    <option value=\"11\">C (gcc-4.3.4)</option>
-                    <option value=\"27\">C# (mono-2.8)</option>
-                    <option value=\"44\">C++0x (gcc-4.5.1)</option>
-                    <option value=\"10\">Java (sun-jdk-1.6.0.17)</option>
-                    <option value=\"4\">Python (python 2.6.4)</option>
-                    <option value=\"116\">Python 3 (python-3.1.2)</option>
-                    <option value=\"40\">SQL (sqlite3-3.7.3)</option>
-                </select>";
+    $id = required_param('id', PARAM_INT);
+    $sql="SELECT * FROM mdl_pa WHERE id=$pa->id";
+    $data=$DB->get_record_sql($sql,null);
+    echo"<br>";
 
-echo "<br>";
-echo "<br>";
+    $table=new html_table();
 
-echo "<input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">";
-echo "<br>";
-echo "<br>";
+    //table stucture
+    $row=new html_table_row();
+    $row->cells=array(new html_table_cell("<b>Test case</b>"),new html_table_cell("<b>Input</b>"),new html_table_cell("<b>Output</b>"),new html_table_cell("<b>Status</b>"),new html_table_cell("<b>Hidden</b>"));
+    $table->data[]=$row;
 
-echo "<textarea name='source' style='font-size:15pt;height:500px;width:700px;'></textarea><br/>";
-echo "<button type='button'>Submit</button>";
+    //test case 1
+    $row=new html_table_row();
+    if($data->use1==0)
+        $u="Not used";
+    else
+        $u="Used";
+    if($data->visible1==0)
+        $v="Not hidden";
+    else
+        $v="Hidden";
+    $row->cells=array(new html_table_cell("Test case 1"),new html_table_cell($data->input1),new html_table_cell($data->output1),new html_table_cell($u),new html_table_cell($v));
+    if(has_capability('mod/pa:testcase',$context))
+        $table->data[]=$row;
+    else
+        if($data->visible1==0)
+            $table->data[]=$row;
+
+    //test case 2
+    $row=new html_table_row();
+    if($data->use2==0)
+        $u="Not used";
+    else
+        $u="Used";
+    if($data->visible2==0)
+        $v="Not hidden";
+    else
+        $v="Hidden";
+    $row->cells=array(new html_table_cell("Test case 2"),new html_table_cell($data->input2),new html_table_cell($data->output2),new html_table_cell($u),new html_table_cell($v));
+    if(has_capability('mod/pa:testcase',$context))
+        $table->data[]=$row;
+    else
+        if($data->visible2==0)
+            $table->data[]=$row;
+
+    //test case 3
+    $row=new html_table_row();
+    if($data->use3==0)
+        $u="Not used";
+    else
+        $u="Used";
+    if($data->visible3==0)
+        $v="Not hidden";
+    else
+        $v="Hidden";
+    $row->cells=array(new html_table_cell("Test case 3"),new html_table_cell($data->input3),new html_table_cell($data->output3),new html_table_cell($u),new html_table_cell($v));
+    if(has_capability('mod/pa:testcase',$context))
+        $table->data[]=$row;
+    else
+        if($data->visible3==0)
+            $table->data[]=$row;
+
+    echo html_writer::table($table);
+
+$urlparams = array('id' => $id);
+$url = new moodle_url('/mod/pa/submission.php', $urlparams);
+$backlink = $OUTPUT->action_link($url, 'Add New Submission');
+
+echo $OUTPUT->heading('Submission');
+echo $backlink;
 
 // Finish the page.
 echo $OUTPUT->footer();
