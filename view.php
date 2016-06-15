@@ -134,5 +134,11 @@ $backlink = $OUTPUT->action_link($url, 'Add New Submission');
 echo $OUTPUT->heading('Submission');
 echo $backlink;
 
+$urlparams = array('id' => $id);
+$url = new moodle_url('/mod/pa/view_submission.php', $urlparams);
+$backlink = $OUTPUT->action_link($url, 'View all Submissions');
+echo $OUTPUT->heading('View Submission');
+echo $backlink;
+
 // Finish the page.
 echo $OUTPUT->footer();
